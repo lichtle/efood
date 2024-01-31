@@ -1,6 +1,6 @@
-import { Card, Tags, About, NameRate, Rating } from "./styles";
+import { Card, Tags, About, NameRate, Rating, Button } from "./styles";
 
-import Button from "../Button";
+import Tag from "../Tag";
 
 import star from "../../assets/star.png";
 import sushi from "../../assets/sushi.png";
@@ -9,8 +9,8 @@ const Product = () => (
   <>
     <Card>
       <Tags>
-        <Button>Destaque da semana</Button>
-        <Button>Japonesa</Button>
+        <Tag>Destaque da semana</Tag>
+        <Tag>Japonesa</Tag>
       </Tags>
       <img src={sushi} />
       <About>
@@ -29,7 +29,7 @@ const Product = () => (
           rápida, embalagens cuidadosas e qualidade garantida. Experimente o
           Japão sem sair do lar com nosso delivery!
         </p>
-        <Button>Saiba mais</Button>
+        <Button to="/product-details">Saiba mais</Button>
       </About>
     </Card>
   </>

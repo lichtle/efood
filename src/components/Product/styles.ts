@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import { cores } from "../../styles";
 
 export const Card = styled.div`
@@ -52,8 +54,14 @@ export const Tags = styled.div`
   position: absolute;
   top: 16px;
   right: 16px;
+  cursor: auto;
+`;
 
-  button {
-    cursor: auto;
-  }
+export const Button = styled(Link)`
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: ${cores.buttonAddBuy};
+  background-color: ${cores.buttonKnowMore};
+  padding: 4px 6px;
 `;
