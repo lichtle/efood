@@ -29,7 +29,7 @@ const Restaurant = () => (
           rápida, embalagens cuidadosas e qualidade garantida. Experimente o
           Japão sem sair do lar com nosso delivery!
         </p>
-        <Button to="/product-details">Saiba mais</Button>
+        <Button to="/restaurant-details">Saiba mais</Button>
       </About>
     </Card>
   </>
