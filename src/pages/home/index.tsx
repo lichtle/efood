@@ -1,11 +1,11 @@
 import Header from "../../components/Header";
-import ProductsList from "../../components/ProductsList";
+import RestaurantsList from "../../components/RestaurantsList";
 import Footer from "../../components/Footer";
 
 const Home = () => (
   <>
     <Header />
-    <ProductsList />
+    <RestaurantsList />
     <Footer />
   </>
 );

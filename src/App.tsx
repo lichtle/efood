@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { GlobalStyle } from "./styles";
 
 import Home from "./pages/home";
-import ProductDetails from "./pages/product-details";
+import RestaurantDetails from "./pages/product-details";
 
 const rotas = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const rotas = createBrowserRouter([
   },
   {
     path: "/product-details",
-    element: <ProductDetails />,
+    element: <RestaurantDetails />,
   },
 ]);
 

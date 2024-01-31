@@ -1,11 +1,11 @@
-import Header from "../../components/Header";
+import Details from "../../components/RestaurantDetails";
 import Footer from "../../components/Footer";
 
-const ProductDetails = () => (
+const RestaurantDetails = () => (
   <>
-    <Header />
+    <Details />
     <Footer />
   </>
 );
 
-export default ProductDetails;
+export default RestaurantDetails;

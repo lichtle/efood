@@ -8,11 +8,6 @@ export const Card = styled.div`
   border: 1px solid ${cores.buttonKnowMore};
   position: relative;
 
-  p {
-    font-weight: 400;
-    font-size: 14px;
-  }
-
   button {
     font-size: 14px;
   }
@@ -27,6 +22,11 @@ export const About = styled.div`
   align-items: flex-start;
   gap: 16px;
   padding: 8px;
+
+  p {
+    font-weight: 400;
+    line-height: 22px;
+  }
 `;
 
 export const NameRate = styled.div`

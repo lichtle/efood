@@ -5,7 +5,7 @@ import Tag from "../Tag";
 import star from "../../assets/star.png";
 import sushi from "../../assets/sushi.png";
 
-const Product = () => (
+const Restaurant = () => (
   <>
     <Card>
       <Tags>
@@ -35,4 +35,4 @@ const Product = () => (
   </>
 );
 
-export default Product;
+export default Restaurant;
