@@ -1,5 +1,11 @@
 import { ButtonContainer } from "./styles";
 
-const Button = () => <ButtonContainer>Saiba mais</ButtonContainer>;
+type Props = {
+  children: string;
+};
+
+const Button = ({ children }: Props) => (
+  <ButtonContainer>{children}</ButtonContainer>
+);
 
 export default Button;
