@@ -25,5 +25,6 @@ export const AboutDish = styled(About)`
     width: 100%;
     border: none;
     padding: 4px 0;
+    cursor: pointer;
   }
 `;

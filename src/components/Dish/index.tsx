@@ -10,7 +10,7 @@ const Dish = () => (
       A clássica Marguerita: molho de tomate suculento, muçarela derretida,
       manjericão fresco e um toque de azeite. Sabor e simplicidade!
     </p>
-    <button>Adicionar ao carrinho</button>
+    <button>Mais detalhes</button>
   </AboutDish>
 );
 
