@@ -1,38 +1,63 @@
 import { Card, Tags, About, NameRate, Rating, Button } from "./styles";
 
+import { capitalizeFirstLetter } from "../../utils/capitalize";
+import { getDescricao } from "../../utils/getDescricao";
+
 import Tag from "../Tag";
 
 import star from "../../assets/star.png";
-import sushi from "../../assets/sushi.png";
 
-const Restaurant = () => (
-  <>
+export type MenuItem = {
+  id: number;
+  nome: string;
+  descricao: string;
+  foto: string;
+  porcao: string;
+  preco: number;
+};
+
+export type RestaurantType = {
+  id?: number;
+  titulo: string;
+  destacado?: boolean;
+  tipo: string;
+  avaliacao?: number;
+  descricao?: string;
+  capa: string;
+  cardapio?: MenuItem[];
+};
+
+const Restaurant = ({
+  id,
+  titulo,
+  destacado,
+  tipo,
+  avaliacao,
+  descricao,
+  capa,
+}: RestaurantType) => {
+  return (
     <Card>
       <Tags>
-        <Tag>Destaque da semana</Tag>
-        <Tag>Japonesa</Tag>
+        {destacado && <Tag>Destaque da semana</Tag>}
+        <Tag>{capitalizeFirstLetter(tipo)}</Tag>
       </Tags>
-      <img src={sushi} />
+      <img src={capa} />
       <About>
         <NameRate>
-          <h2>Hioki Sushi</h2>
+          <h2>{titulo}</h2>
           <Rating>
-            <span>4.9</span>
+            <span>{avaliacao}</span>
             <span>
               <img src={star} />
             </span>
           </Rating>
         </NameRate>
-        <p>
-          Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis
-          frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega
-          rápida, embalagens cuidadosas e qualidade garantida. Experimente o
-          Japão sem sair do lar com nosso delivery!
-        </p>
-        <Button to="/restaurant-details">Saiba mais</Button>
+        <p>{getDescricao(descricao, 195)}</p>
+        <Button to={`restaurantes/${id}`}>Saiba mais</Button>
       </About>
     </Card>
-  </>
-);
+  );
+};
 
 export default Restaurant;

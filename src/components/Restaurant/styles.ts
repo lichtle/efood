@@ -7,9 +7,17 @@ import { cores } from "../../styles";
 export const Card = styled.div`
   border: 1px solid ${cores.buttonKnowMore};
   position: relative;
+  max-width: 472px;
+  max-height: 398px;
 
   button {
     font-size: 14px;
+  }
+
+  img {
+    max-height: 217px;
+    width: 100%;
+    object-fit: cover;
   }
 `;
 
