@@ -10,6 +10,8 @@ import {
 
 import { MenuItem } from "../Restaurant";
 
+import { formataPreco } from "../../utils/formataPreco";
+
 import fechar from "../../assets/close.png";
 
 const Dish = ({ nome, descricao, foto, porcao, preco }: MenuItem) => {
@@ -80,7 +82,9 @@ const Dish = ({ nome, descricao, foto, porcao, preco }: MenuItem) => {
               <h4>{modal.name}</h4>
               <p>{modal.description}</p>
               <span>Serve: de {modal.serves}</span>
-              <Button width>Adicionar ao carrinho: R${modal.price}</Button>
+              <Button width>
+                Adicionar ao carrinho: {formataPreco(modal.price)}
+              </Button>
             </div>
           </InfosContainer>
         </ModalContent>
