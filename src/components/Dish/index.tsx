@@ -1,17 +1,98 @@
-import { AboutDish } from "./styles";
+import { useState } from "react";
 
-import pizza from "../../assets/pizza.png";
+import {
+  AboutDish,
+  Button,
+  Modal,
+  ModalContent,
+  InfosContainer,
+} from "./styles";
 
-const Dish = () => (
-  <AboutDish>
-    <img src={pizza} />
-    <h4>Pizza Marguerita</h4>
-    <p>
-      A clássica Marguerita: molho de tomate suculento, muçarela derretida,
-      manjericão fresco e um toque de azeite. Sabor e simplicidade!
-    </p>
-    <button>Mais detalhes</button>
-  </AboutDish>
-);
+import { MenuItem } from "../Restaurant";
+
+import fechar from "../../assets/close.png";
+
+const Dish = ({ nome, descricao, foto, porcao, preco }: MenuItem) => {
+  type ModalType = {
+    isVisible: boolean;
+    name: string;
+    description: string;
+    photo: string;
+    serves: string;
+    price: number;
+  };
+
+  const [modal, setModal] = useState<ModalType>({
+    isVisible: false,
+    name: "",
+    description: "",
+    photo: "",
+    serves: "",
+    price: 0,
+  });
+
+  const closeModal = () => {
+    setModal({
+      isVisible: false,
+      name: "",
+      description: "",
+      photo: "",
+      serves: "",
+      price: 0,
+    });
+  };
+
+  return (
+    <>
+      <AboutDish>
+        <img src={foto} />
+        <h4>{nome}</h4>
+        <p>{descricao}</p>
+        <Button
+          onClick={() => {
+            setModal({
+              isVisible: true,
+              name: `${nome}`,
+              description: `${descricao}`,
+              photo: `${foto}`,
+              serves: `${porcao}`,
+              price: parseFloat(`${preco}`),
+            });
+          }}
+        >
+          Mais detalhes
+        </Button>
+      </AboutDish>
+
+      <Modal className={modal.isVisible ? "visivel" : ""}>
+        <ModalContent className="container">
+          <InfosContainer>
+            <img
+              className="close-button"
+              src={fechar}
+              alt="Ícone de fechar"
+              onClick={() => {
+                closeModal();
+              }}
+            />
+            <img src={modal.photo} />
+            <div>
+              <h4>{modal.name}</h4>
+              <p>{modal.description}</p>
+              <span>Serve: de {modal.serves}</span>
+              <Button width>Adicionar ao carrinho: R${modal.price}</Button>
+            </div>
+          </InfosContainer>
+        </ModalContent>
+        <div
+          onClick={() => {
+            closeModal();
+          }}
+          className="overlay"
+        ></div>
+      </Modal>
+    </>
+  );
+};
 
 export default Dish;
