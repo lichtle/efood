@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getDescricao } from "../../utils/getDescricao";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 import { ListOfDishes } from "./styles";
@@ -45,14 +44,7 @@ const RestaurantDetails = () => {
         <ListOfDishes>
           {menu.map((item) => (
             <li key={item.id}>
-              <Dish
-                id={item.id}
-                nome={item.nome}
-                descricao={getDescricao(item.descricao, 250)}
-                foto={item.foto}
-                porcao={item.porcao}
-                preco={item.preco}
-              />
+              <Dish dish={item} />
             </li>
           ))}
         </ListOfDishes>

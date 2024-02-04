@@ -32,6 +32,7 @@ export const AboutDish = styled(About)`
 export const Button = styled.button<Props>`
   background-color: ${cores.buttonAddBuy};
   color: ${cores.buttonKnowMore};
+  font-size: 14px;
   font-weight: 700;
   width: ${(props) => (props.width ? "218px" : "100%")};
   border: none;

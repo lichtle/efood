@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+import { MenuItem } from "../Restaurant";
+
+import { formataPreco } from "../../utils/formataPreco";
+import { getDescricao } from "../../utils/getDescricao";
+
 import {
   AboutDish,
   Button,
@@ -8,57 +13,37 @@ import {
   InfosContainer,
 } from "./styles";
 
-import { MenuItem } from "../Restaurant";
-
-import { formataPreco } from "../../utils/formataPreco";
-
 import fechar from "../../assets/close.png";
 
-const Dish = ({ nome, descricao, foto, porcao, preco }: MenuItem) => {
+type Props = {
+  dish: MenuItem;
+};
+
+const Dish = ({ dish }: Props) => {
   type ModalType = {
     isVisible: boolean;
-    name: string;
-    description: string;
-    photo: string;
-    serves: string;
-    price: number;
   };
 
   const [modal, setModal] = useState<ModalType>({
     isVisible: false,
-    name: "",
-    description: "",
-    photo: "",
-    serves: "",
-    price: 0,
   });
 
   const closeModal = () => {
     setModal({
       isVisible: false,
-      name: "",
-      description: "",
-      photo: "",
-      serves: "",
-      price: 0,
     });
   };
 
   return (
     <>
       <AboutDish>
-        <img src={foto} />
-        <h4>{nome}</h4>
-        <p>{descricao}</p>
+        <img src={dish.foto} />
+        <h4>{dish.nome}</h4>
+        <p>{getDescricao(dish.descricao, 200)}</p>
         <Button
           onClick={() => {
             setModal({
               isVisible: true,
-              name: `${nome}`,
-              description: `${descricao}`,
-              photo: `${foto}`,
-              serves: `${porcao}`,
-              price: parseFloat(`${preco}`),
             });
           }}
         >
@@ -77,13 +62,13 @@ const Dish = ({ nome, descricao, foto, porcao, preco }: MenuItem) => {
                 closeModal();
               }}
             />
-            <img src={modal.photo} />
+            <img src={dish.foto} />
             <div>
-              <h4>{modal.name}</h4>
-              <p>{modal.description}</p>
-              <span>Serve: de {modal.serves}</span>
+              <h4>{dish.nome}</h4>
+              <p>{dish.descricao}</p>
+              <span>Serve: de {dish.porcao}</span>
               <Button width>
-                Adicionar ao carrinho: {formataPreco(modal.price)}
+                Adicionar ao carrinho: {formataPreco(dish.preco)}
               </Button>
             </div>
           </InfosContainer>
