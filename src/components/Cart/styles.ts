@@ -32,8 +32,9 @@ export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
   height: 100%;
-  padding: 32px 8px 0 8px;
+  padding: 32px 8px;
   z-index: 1;
+  overflow-y: scroll;
 
   p {
     text-align: center;
