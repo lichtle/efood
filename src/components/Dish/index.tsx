@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { add, open } from "../../store/reducers/cart";
 
 import { MenuItem } from "../Restaurant";
 
-import { formataPreco } from "../../utils/formataPreco";
+import { formatPrice } from "../../utils/formatPrice";
 import { getDescricao } from "../../utils/getDescricao";
+
+import Cart from "../Cart";
 
 import {
   AboutDish,
@@ -27,6 +32,13 @@ const Dish = ({ dish }: Props) => {
   const [modal, setModal] = useState<ModalType>({
     isVisible: false,
   });
+
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(add(dish));
+    dispatch(open());
+  };
 
   const closeModal = () => {
     setModal({
@@ -67,8 +79,13 @@ const Dish = ({ dish }: Props) => {
               <h4>{dish.nome}</h4>
               <p>{dish.descricao}</p>
               <span>Serve: de {dish.porcao}</span>
-              <Button width>
-                Adicionar ao carrinho: {formataPreco(dish.preco)}
+              <Button
+                width
+                onClick={() => {
+                  addToCart();
+                }}
+              >
+                Adicionar ao carrinho: {formatPrice(dish.preco)}
               </Button>
             </div>
           </InfosContainer>
@@ -80,6 +97,7 @@ const Dish = ({ dish }: Props) => {
           className="overlay"
         ></div>
       </Modal>
+      <Cart />
     </>
   );
 };

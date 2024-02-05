@@ -1,4 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import { store } from "./store";
 
 import { GlobalStyle } from "./styles";
 
@@ -8,11 +11,13 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Rotas />
-      <Footer />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Rotas />
+        <Footer />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
