@@ -37,8 +37,9 @@ export const Sidebar = styled.aside`
   overflow-y: scroll;
 
   p {
-    text-align: center;
+    text-align: left;
     color: ${cores.buttonAddBuy};
+    margin-bottom: 24px;
   }
 `;
 
