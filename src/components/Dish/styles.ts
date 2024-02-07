@@ -19,7 +19,7 @@ export const AboutDish = styled(About)`
     object-fit: cover;
   }
 
-  h4 {
+  > h3 {
     font-weight: 900;
     font-size: 16px;
   }
@@ -30,11 +30,12 @@ export const AboutDish = styled(About)`
 `;
 
 export const Button = styled.button<Props>`
+  height: 24px;
+  width: ${(props) => (props.width ? "218px" : "100%")};
   background-color: ${cores.buttonAddBuy};
   color: ${cores.buttonKnowMore};
   font-size: 14px;
   font-weight: 700;
-  width: ${(props) => (props.width ? "218px" : "100%")};
   border: none;
   padding: 4px 0;
   cursor: pointer;
@@ -80,13 +81,13 @@ export const ModalContent = styled.div`
     cursor: pointer;
   }
 
-  h4,
+  h3,
   p,
   span {
     color: #fff;
   }
 
-  h4 {
+  > h3 {
     font-size: 18px;
     font-weight: 900;
   }

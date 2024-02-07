@@ -1,7 +1,6 @@
 import { Card, Tags, About, NameRate, Rating, Button } from "./styles";
 
-import { capitalizeFirstLetter } from "../../utils/capitalize";
-import { getDescricao } from "../../utils/getDescricao";
+import { capitalizeFirstLetter, getDescricao } from "../../utils";
 
 import Tag from "../Tag";
 

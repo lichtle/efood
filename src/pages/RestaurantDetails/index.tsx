@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { capitalizeFirstLetter } from "../../utils/capitalize";
+import { capitalizeFirstLetter } from "../../utils";
 
 import { ListOfDishes } from "./styles";
 

@@ -3,10 +3,6 @@ import { useState, useEffect } from "react";
 import { List } from "./styles";
 import Restaurant, { RestaurantType } from "../Restaurant";
 
-// type Props = {
-//   restaurants: RestaurantType[];
-// };
-
 const RestaurantsList = () => {
   const [restaurantsList, setRestaurantsList] = useState<RestaurantType[]>([]);
 

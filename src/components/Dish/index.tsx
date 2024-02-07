@@ -5,8 +5,7 @@ import { add, open } from "../../store/reducers/cart";
 
 import { MenuItem } from "../Restaurant";
 
-import { formatPrice } from "../../utils/formatPrice";
-import { getDescricao } from "../../utils/getDescricao";
+import { formatPrice, getDescricao } from "../../utils";
 
 import Cart from "../Cart";
 
@@ -50,7 +49,7 @@ const Dish = ({ dish }: Props) => {
     <>
       <AboutDish>
         <img src={dish.foto} />
-        <h4>{dish.nome}</h4>
+        <h3>{dish.nome}</h3>
         <p>{getDescricao(dish.descricao, 200)}</p>
         <Button
           onClick={() => {
@@ -76,7 +75,7 @@ const Dish = ({ dish }: Props) => {
             />
             <img src={dish.foto} />
             <div>
-              <h4>{dish.nome}</h4>
+              <h3>{dish.nome}</h3>
               <p>{dish.descricao}</p>
               <span>Serve: de {dish.porcao}</span>
               <Button

@@ -53,7 +53,7 @@ export const Product = styled.li`
   div {
     margin: 8px 0 0 8px;
 
-    h4 {
+    h3 {
       font-size: 18px;
       font-weight: 900;
       margin-bottom: 16px;
