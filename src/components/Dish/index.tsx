@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { add, open } from "../../store/reducers/cart";
+import { addItem, openCart } from "../../store/reducers/cart";
 
 import { MenuItem } from "../Restaurant";
 
@@ -35,8 +35,8 @@ const Dish = ({ dish }: Props) => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(add(dish));
-    dispatch(open());
+    dispatch(addItem(dish));
+    dispatch(openCart());
   };
 
   const closeModal = () => {
