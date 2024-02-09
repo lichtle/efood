@@ -12,7 +12,7 @@ export const CartContainer = styled.div`
   justify-content: flex-end;
   z-index: 1;
 
-  &.is-open {
+  &.open-cart {
     display: flex;
   }
 `;
@@ -40,6 +40,10 @@ export const Sidebar = styled.aside`
     text-align: left;
     color: ${cores.buttonAddBuy};
     margin-bottom: 24px;
+  }
+
+  .empty-cart-warning {
+    text-align: center;
   }
 `;
 

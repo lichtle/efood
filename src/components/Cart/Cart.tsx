@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { RootReducer } from "../../store";
 import { closeCart, removeItem } from "../../store/reducers/cart";
-import { showCheckout } from "../../store/reducers/checkout";
+import { openCheckout } from "../../store/reducers/checkout";
 
 import { getTotalPrice, formatPrice } from "../../utils";
 
@@ -21,8 +21,7 @@ import removeIcon from "../../assets/remove.png";
 
 export const Cart = () => {
   // Interações (remoção de itens e fechamento do carrinho)
-
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart);
+  const { isCartOpen, items } = useSelector((state: RootReducer) => state.cart);
 
   const dispatch = useDispatch();
 
@@ -34,15 +33,14 @@ export const Cart = () => {
     dispatch(removeItem(id));
   };
 
-  const openCheckout = () => {
-    dispatch(showCheckout());
+  const openCheck = () => {
+    dispatch(openCheckout());
     // dispatch(closeCart());
   };
 
   // Conteúdo do componente
-
   return (
-    <CartContainer className={isOpen ? "is-open" : ""}>
+    <CartContainer className={isCartOpen ? "open-cart" : ""}>
       <Overlay onClick={close} />
       <Sidebar>
         {items.length >= 1 ? (
@@ -72,11 +70,11 @@ export const Cart = () => {
                   <span>{formatPrice(getTotalPrice(items))}</span>
                 </p>
               </TotalPrice>
-              <Button onClick={openCheckout}>Continuar a compra</Button>
+              <Button onClick={openCheck}>Continuar a compra</Button>
             </div>
           </>
         ) : (
-          <p>Seu carrinho está vazio</p>
+          <p className="empty-cart-warning">Seu carrinho está vazio</p>
         )}
       </Sidebar>
     </CartContainer>
