@@ -6,14 +6,21 @@ import { useFormik } from "formik";
 
 import { RootReducer } from "../../store";
 import { clearCart, openCart } from "../../store/reducers/cart";
-import { hideCheckout } from "../../store/reducers/checkout";
+import { closeCheckout } from "../../store/reducers/checkout";
 
 import { formatPrice, getTotalPrice } from "../../utils";
 import { usePurchaseMutation } from "../../services/api";
 
-import { Title, Input, InputGroup, ButtonGroup } from "./styles";
+import {
+  CheckoutContainer,
+  Overlay,
+  Sidebar,
+  Title,
+  Input,
+  InputGroup,
+  ButtonGroup,
+} from "./styles";
 import { Button } from "../Dish/styles";
-import { CartContainer as CheckoutContainer, Overlay, Sidebar } from "../Cart/styles";
 
 const CheckoutForm = () => {
   const [deliveryInfo, setDeliveryInfo] = useState(true);
@@ -23,7 +30,7 @@ const CheckoutForm = () => {
   const dispatch = useDispatch();
 
   const goBackToCart = () => {
-    dispatch(hideCheckout());
+    dispatch(closeCheckout());
     dispatch(openCart());
   };
 
@@ -42,14 +49,16 @@ const CheckoutForm = () => {
   };
 
   const closeSuccessMessage = () => {
-    dispatch(hideCheckout()), dispatch(clearCart());
+    dispatch(closeCheckout()), dispatch(clearCart());
   };
 
-  const closeCheckout = () => {
-    dispatch(hideCheckout());
+  const closeCheck = () => {
+    dispatch(closeCheckout());
   };
 
-  const { isOpen } = useSelector((state: RootReducer) => state.checkout);
+  const { isCheckoutOpen } = useSelector(
+    (state: RootReducer) => state.checkout
+  );
   const { items } = useSelector((state: RootReducer) => state.cart);
 
   const [purchase, { data }] = usePurchaseMutation();
@@ -146,8 +155,8 @@ const CheckoutForm = () => {
   };
 
   return (
-    <CheckoutContainer className={isOpen ? "is-open" : ""}>
-      <Overlay onClick={closeCheckout} />
+    <CheckoutContainer className={isCheckoutOpen ? "open-checkout" : ""}>
+      <Overlay onClick={closeCheck} />
       <Sidebar>
         <form onSubmit={form.handleSubmit}>
           {deliveryInfo && (
