@@ -3,12 +3,12 @@ import { MenuItem } from "../../components/Restaurant";
 
 type CartState = {
   items: MenuItem[];
-  isOpen: boolean;
+  isCartOpen: boolean;
 };
 
 const initialState: CartState = {
   items: [],
-  isOpen: false,
+  isCartOpen: false,
 };
 
 const cartSlice = createSlice({
@@ -23,10 +23,10 @@ const cartSlice = createSlice({
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
     openCart: (state) => {
-      state.isOpen = true;
+      state.isCartOpen = true;
     },
     closeCart: (state) => {
-      state.isOpen = false;
+      state.isCartOpen = false;
     },
     clearCart: (state) => {
       state.items = [];
@@ -34,5 +34,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, openCart, closeCart, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, openCart, closeCart, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;
