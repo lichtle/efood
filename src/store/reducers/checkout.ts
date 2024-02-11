@@ -13,6 +13,7 @@ const checkoutSlice = createSlice({
   initialState,
   reducers: {
     openCheckout: (state) => {
+      console.log(state.isCheckoutOpen);
       state.isCheckoutOpen = true;
     },
     closeCheckout: (state) => {

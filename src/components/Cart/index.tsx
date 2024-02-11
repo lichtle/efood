@@ -6,8 +6,6 @@ import { openCheckout } from "../../store/reducers/checkout";
 
 import { getTotalPrice, formatPrice } from "../../utils";
 
-import CheckoutForm from "../Checkout";
-
 import {
   CartContainer,
   Overlay,
@@ -20,6 +18,8 @@ import {
 import { Button } from "../Dish/styles";
 
 import removeIcon from "../../assets/remove.png";
+
+import CheckoutForm from "../Checkout";
 
 export const Cart = () => {
   // Interações (remoção de itens e fechamento do carrinho)

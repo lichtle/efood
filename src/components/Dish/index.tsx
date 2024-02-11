@@ -7,7 +7,7 @@ import { MenuItem } from "../Restaurant";
 
 import { formatPrice, getDescricao } from "../../utils";
 
-import { Cart } from "../Cart/Cart";
+import { Cart } from "../Cart";
 
 import {
   AboutDish,
