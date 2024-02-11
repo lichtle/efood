@@ -6,6 +6,8 @@ import { openCheckout } from "../../store/reducers/checkout";
 
 import { getTotalPrice, formatPrice } from "../../utils";
 
+import CheckoutForm from "../Checkout";
+
 import {
   CartContainer,
   Overlay,
@@ -22,6 +24,9 @@ import removeIcon from "../../assets/remove.png";
 export const Cart = () => {
   // Interações (remoção de itens e fechamento do carrinho)
   const { isCartOpen, items } = useSelector((state: RootReducer) => state.cart);
+  const { isCheckoutOpen } = useSelector(
+    (state: RootReducer) => state.checkout
+  );
 
   const dispatch = useDispatch();
 
@@ -35,7 +40,6 @@ export const Cart = () => {
 
   const openCheck = () => {
     dispatch(openCheckout());
-    // dispatch(closeCart());
   };
 
   // Conteúdo do componente
@@ -46,8 +50,8 @@ export const Cart = () => {
         {items.length >= 1 ? (
           <>
             <ul>
-              {items.map((item) => (
-                <Product key={item.id}>
+              {items.map((item, index) => (
+                <Product key={index}>
                   <ProductImage src={item.foto} />
                   <div>
                     <h3>{item.nome}</h3>
@@ -76,6 +80,7 @@ export const Cart = () => {
         ) : (
           <p className="empty-cart-warning">Seu carrinho está vazio</p>
         )}
+        {isCheckoutOpen && <CheckoutForm />}
       </Sidebar>
     </CartContainer>
   );

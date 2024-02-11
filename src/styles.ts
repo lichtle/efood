@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const cores = {
+export const colors = {
   background: "#FFF8F2",
   buttonKnowMore: "#E66767",
   buttonAddBuy: "#FFEBD9",
@@ -23,6 +23,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.background};
+    background-color: ${colors.background};
   }
 `;

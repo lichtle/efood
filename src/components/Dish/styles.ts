@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 import { About } from "../Restaurant/styles";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 type Props = {
-  width?: boolean;
+  width?: string;
 };
 
 export const AboutDish = styled(About)`
-  background-color: ${cores.buttonKnowMore};
-  color: ${cores.buttonAddBuy};
+  background-color: ${colors.buttonKnowMore};
+  color: ${colors.buttonAddBuy};
   gap: 8px;
   font-size: 14px;
 
@@ -31,9 +31,9 @@ export const AboutDish = styled(About)`
 
 export const Button = styled.button<Props>`
   height: 24px;
-  width: ${(props) => (props.width ? "218px" : "100%")};
-  background-color: ${cores.buttonAddBuy};
-  color: ${cores.buttonKnowMore};
+  width: ${(props) => (props.width ? props.width : "100%")};
+  background-color: ${colors.buttonAddBuy};
+  color: ${colors.buttonKnowMore};
   font-size: 14px;
   font-weight: 700;
   border: none;
@@ -67,7 +67,7 @@ export const Modal = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: ${cores.buttonKnowMore};
+  background-color: ${colors.buttonKnowMore};
   padding: 32px;
   position: relative;
   z-index: 1;

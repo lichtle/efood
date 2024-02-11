@@ -30,16 +30,16 @@ type PurchasePayload = {
   };
 };
 
-// type PurchaseResponse = {
-//   orderId: string;
-// };
+type PurchaseResponse = {
+  orderId: string;
+};
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://fake-api-tau.vercel.app/api/efood",
   }),
   endpoints: (builder) => ({
-    purchase: builder.mutation<any, PurchasePayload>({
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       // Enquanto o query é utilizado para obter dados, o mutation é utilizado para enviar dados
       query: (body) => ({
         url: "checkout",

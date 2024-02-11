@@ -29,7 +29,5 @@ export const Container = styled.div<Props>`
       font-weight: 100;
       top: 25px;
     }
-
-    
   }
 `;

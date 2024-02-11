@@ -69,53 +69,66 @@ const CheckoutForm = () => {
       description: "",
       city: "",
       zipCode: "",
-      number: 1,
+      number: 0,
       complement: "",
       name: "",
       cardNumber: "",
-      code: 1,
-      month: 1,
-      year: 1,
+      code: 0,
+      month: 0,
+      year: 0,
     },
     validationSchema: Yup.object({
       receiver: Yup.string()
         .min(5, "Este campo precisa ter no mínimo 5 caracteres")
         .required("Este campo é obrigatório"),
+
       description: Yup.string()
         .min(5, "Este campo precisa ter no mínimo 5 caracteres")
         .required("Este campo é obrigatório"),
+
       city: Yup.string()
         .min(3, "Este campo precisa ter no mínimo 3 caracteres")
         .required("Este campo é obrigatório"),
+
       zipCode: Yup.string()
         .min(8, "Este campo precisa ter 8 caracteres")
         .max(8, "Este campo precisa ter no máximo 8 caracteres")
         .required("Este campo é obrigatório"),
+
       number: Yup.number()
         .min(1, "Este campo precisa ter no mínimo um número")
         .required("Este campo é obrigatório"),
-      complement: Yup.string().optional(),
+
+      complement: Yup.string(),
+
       name: Yup.string()
         .min(5, "Este campo precisa ter no mínimo 5 caracteres")
         .required("Este campo é obrigatório"),
+
       cardNumber: Yup.string()
         .min(16, "Este campo precisa ter 16 caracteres")
         .max(16, "Este campo precisa ter no máximo 16 caracteres")
         .required("Este campo é obrigatório"),
-      code: Yup.number()
+
+      code: Yup.string()
         .min(3, "Este campo precisa ter 3 caracteres")
         .max(3, "Este campo precisa ter no máximo 3 caracteres")
         .required("Este campo é obrigatório"),
+
       month: Yup.number()
-        .min(2, "Este campo precisa ter 2 caracteres")
-        .max(2, "Este campo precisa ter no máximo 2 caracteres")
+        .min(1, "Este campo precisa ter no mínimo o número 1")
+        .max(12, "Este campo precisa ter no máximo o número 12")
         .required("Este campo é obrigatório"),
+
       year: Yup.number()
-        .min(4, "Este campo precisa ter 4 caracteres")
-        .max(4, "Este campo precisa ter no máximo 4 caracteres")
+        .min(
+          new Date().getFullYear(),
+          "O ano deve ser igual ou maior que o ano atual"
+        )
         .required("Este campo é obrigatório"),
     }),
     onSubmit: (values) => {
+      console.log(values);
       purchase({
         products: items.map((item) => ({
           id: item.id,
@@ -238,7 +251,9 @@ const CheckoutForm = () => {
                 />
               </Input>
               <ButtonGroup>
-                <Button onClick={goToPayment}>Continuar com o pagamento</Button>
+                <Button disabled={!form.isValid} onClick={goToPayment}>
+                  Continuar com o pagamento
+                </Button>
                 <Button onClick={goBackToCart}>Voltar para o carrinho</Button>
               </ButtonGroup>
             </section>
@@ -280,7 +295,7 @@ const CheckoutForm = () => {
                   <Input>
                     <label htmlFor="code">CVV</label>
                     <input
-                      type="number"
+                      type="text"
                       id="code"
                       name="code"
                       value={form.values.code}
@@ -317,7 +332,11 @@ const CheckoutForm = () => {
                   </Input>
                 </InputGroup>
                 <ButtonGroup>
-                  <Button type="submit" onClick={showSuccessMessage}>
+                  <Button
+                    type="submit"
+                    disabled={!form.isValid}
+                    onClick={showSuccessMessage}
+                  >
                     Finalizar pagamento
                   </Button>
                   <Button onClick={goBackToDeliveryInfo}>
@@ -328,9 +347,10 @@ const CheckoutForm = () => {
             </section>
           )}
         </form>
+
         {successMessage && (
           <div>
-            <Title>Pedido realizado - {data.orderId}</Title>
+            <Title>Pedido realizado - {data!.orderId}</Title>
             <div>
               <p>
                 Estamos felizes em informar que seu pedido já está em processo

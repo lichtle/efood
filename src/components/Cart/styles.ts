@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -28,7 +28,7 @@ export const Overlay = styled.div`
 `;
 
 export const Sidebar = styled.aside`
-  background-color: ${cores.buttonKnowMore};
+  background-color: ${colors.buttonKnowMore};
   max-width: 360px;
   width: 100%;
   height: 100%;
@@ -38,7 +38,7 @@ export const Sidebar = styled.aside`
 
   p {
     text-align: left;
-    color: ${cores.buttonAddBuy};
+    color: ${colors.buttonAddBuy};
     margin-bottom: 24px;
   }
 
@@ -48,8 +48,8 @@ export const Sidebar = styled.aside`
 `;
 
 export const Product = styled.li`
-  background-color: ${cores.buttonAddBuy};
-  color: ${cores.buttonKnowMore};
+  background-color: ${colors.buttonAddBuy};
+  color: ${colors.buttonKnowMore};
   display: flex;
   margin-bottom: 16px;
   padding: 8px;
@@ -89,7 +89,7 @@ export const RemoveButton = styled.img`
 
 export const TotalPrice = styled.div`
   margin: 40px 0 16px;
-  color: ${cores.buttonAddBuy};
+  color: ${colors.buttonAddBuy};
   font-weight: 700;
 
   p {

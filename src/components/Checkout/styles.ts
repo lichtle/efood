@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const CheckoutContainer = styled.div`
   position: fixed;
@@ -28,7 +28,7 @@ export const Overlay = styled.div`
 `;
 
 export const Sidebar = styled.aside`
-  background-color: ${cores.buttonKnowMore};
+  background-color: ${colors.buttonKnowMore};
   max-width: 360px;
   width: 360px;
   padding: 32px 8px;
@@ -36,7 +36,7 @@ export const Sidebar = styled.aside`
 
   p {
     text-align: left;
-    color: ${cores.buttonAddBuy};
+    color: ${colors.buttonAddBuy};
     margin-bottom: 24px;
   }
 `;
@@ -45,7 +45,7 @@ export const Title = styled.h2`
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 16px;
-  color: ${cores.background};
+  color: ${colors.background};
 `;
 
 export const Input = styled.div`
@@ -56,7 +56,7 @@ export const Input = styled.div`
     margin-bottom: 8px;
     font-size: 14px;
     font-weight: 700;
-    color: ${cores.background};
+    color: ${colors.background};
   }
 
   input {
@@ -65,7 +65,7 @@ export const Input = styled.div`
     border: none;
 
     &.error {
-      border: 1px solid red;
+      border: 3px solid red;
     }
   }
 `;

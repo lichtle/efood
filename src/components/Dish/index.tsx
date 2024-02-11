@@ -79,7 +79,7 @@ const Dish = ({ dish }: Props) => {
               <p>{dish.descricao}</p>
               <span>Serve: de {dish.porcao}</span>
               <Button
-                width
+                width="218px"
                 onClick={() => {
                   addToCart();
                 }}

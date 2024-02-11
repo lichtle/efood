@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const FooterContainer = styled.div`
-  background-color: ${cores.buttonAddBuy};
+  background-color: ${colors.buttonAddBuy};
 
   .container {
     display: flex;
@@ -16,7 +16,7 @@ export const FooterContainer = styled.div`
 
     p {
       text-align: center;
-      color: ${cores.buttonKnowMore};
+      color: ${colors.buttonKnowMore};
       padding: 80px 0 40px;
     }
   }

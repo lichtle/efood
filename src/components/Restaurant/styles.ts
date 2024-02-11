@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const Card = styled.div`
-  border: 1px solid ${cores.buttonKnowMore};
+  border: 1px solid ${colors.buttonKnowMore};
   position: relative;
   max-width: 472px;
   max-height: 398px;
@@ -24,7 +24,7 @@ export const Card = styled.div`
 export const About = styled.div`
   font-weight: 700;
   font-size: 14px;
-  color: ${cores.buttonKnowMore};
+  color: ${colors.buttonKnowMore};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -69,7 +69,7 @@ export const Button = styled(Link)`
   font-size: 14px;
   font-weight: 700;
   text-align: center;
-  color: ${cores.buttonAddBuy};
-  background-color: ${cores.buttonKnowMore};
+  color: ${colors.buttonAddBuy};
+  background-color: ${colors.buttonKnowMore};
   padding: 4px 6px;
 `;

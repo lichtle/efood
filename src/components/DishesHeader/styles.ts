@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 import fundo from "../../assets/header.png";
 
@@ -8,7 +8,7 @@ export const BackgroundContainer = styled.div`
   background-image: url("${fundo}");
   height: 320px;
   padding: 40px;
-  color: ${cores.buttonKnowMore};
+  color: ${colors.buttonKnowMore};
   height: 163px;
 
   .container {

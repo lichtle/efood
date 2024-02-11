@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import fundo from "../../assets/header.png";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const BackgroundContainer = styled.div`
   background-image: url("${fundo}");
@@ -16,7 +16,7 @@ export const BackgroundContainer = styled.div`
     gap: 136px;
 
     h1 {
-      color: ${cores.buttonKnowMore};
+      color: ${colors.buttonKnowMore};
       font-size: 36px;
       font-weight: 900;
     }
