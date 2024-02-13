@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as Yup from "yup";
@@ -22,46 +22,36 @@ import {
 } from "./styles";
 import { Button } from "../Dish/styles";
 
+import InputMask from "react-input-mask";
+
 const CheckoutForm = () => {
-  const [deliveryInfo, setDeliveryInfo] = useState(true);
   const [payment, setPayment] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(false);
+
+  const [purchase, { data, isSuccess }] = usePurchaseMutation();
+
+  const { isCheckoutOpen } = useSelector(
+    (state: RootReducer) => state.checkout
+  );
+
+  const { items } = useSelector((state: RootReducer) => state.cart);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clearCart());
+    }
+  }, [isSuccess, dispatch]);
 
   const goBackToCart = () => {
     dispatch(closeCheckout());
     dispatch(openCart());
   };
 
-  const goToPayment = () => {
-    setPayment(true);
-    setDeliveryInfo(false);
-  };
-
-  const goBackToDeliveryInfo = () => {
-    setDeliveryInfo(true);
-    setPayment(false);
-  };
-
-  const showSuccessMessage = () => {
-    setSuccessMessage(true);
-  };
-
-  const closeSuccessMessage = () => {
-    dispatch(closeCheckout()), dispatch(clearCart());
-  };
-
   const closeCheck = () => {
     dispatch(closeCheckout());
+    setPayment(false);
   };
-
-  const { isCheckoutOpen } = useSelector(
-    (state: RootReducer) => state.checkout
-  );
-  const { items } = useSelector((state: RootReducer) => state.cart);
-
-  const [purchase, { data }] = usePurchaseMutation();
 
   const form = useFormik({
     initialValues: {
@@ -69,13 +59,13 @@ const CheckoutForm = () => {
       description: "",
       city: "",
       zipCode: "",
-      number: 0,
+      number: "",
       complement: "",
       name: "",
       cardNumber: "",
-      code: 0,
-      month: 0,
-      year: 0,
+      code: "",
+      month: "",
+      year: "",
     },
     validationSchema: Yup.object({
       receiver: Yup.string()
@@ -91,12 +81,12 @@ const CheckoutForm = () => {
         .required("Este campo é obrigatório"),
 
       zipCode: Yup.string()
-        .min(8, "Este campo precisa ter 8 caracteres")
-        .max(8, "Este campo precisa ter no máximo 8 caracteres")
+        .min(8, "Precisa ter 8 caracteres")
+        .max(9, "Este campo precisa ter no máximo 9 caracteres")
         .required("Este campo é obrigatório"),
 
-      number: Yup.number()
-        .min(1, "Este campo precisa ter no mínimo um número")
+      number: Yup.string()
+        .min(1, "Precisa ter um número")
         .required("Este campo é obrigatório"),
 
       complement: Yup.string(),
@@ -107,7 +97,7 @@ const CheckoutForm = () => {
 
       cardNumber: Yup.string()
         .min(16, "Este campo precisa ter 16 caracteres")
-        .max(16, "Este campo precisa ter no máximo 16 caracteres")
+        .max(19, "Este campo precisa ter no máximo 19 caracteres")
         .required("Este campo é obrigatório"),
 
       code: Yup.string()
@@ -116,8 +106,8 @@ const CheckoutForm = () => {
         .required("Este campo é obrigatório"),
 
       month: Yup.number()
-        .min(1, "Este campo precisa ter no mínimo o número 1")
-        .max(12, "Este campo precisa ter no máximo o número 12")
+        .min(1, "Apenas números de 1 à 12")
+        .max(12, "O mês precisa estar entre 1 e 12")
         .required("Este campo é obrigatório"),
 
       year: Yup.number()
@@ -127,8 +117,11 @@ const CheckoutForm = () => {
         )
         .required("Este campo é obrigatório"),
     }),
+    validateOnBlur: true,
+    validateOnChange: true,
+    isInitialValid: false,
+
     onSubmit: (values) => {
-      console.log(values);
       purchase({
         products: items.map((item) => ({
           id: item.id,
@@ -159,12 +152,31 @@ const CheckoutForm = () => {
     },
   });
 
-  const checkInputHasError = (fieldName: string) => {
+  const checkInputHasError = (fieldName: string, message?: string) => {
     const isTouched = fieldName in form.touched;
     const isInvalid = fieldName in form.errors;
     const hasError = isTouched && isInvalid;
 
-    return hasError;
+    if (hasError) return message;
+    return "";
+  };
+
+  const goToPayment = () => {
+    // Se todas as infos do formulário de delivery estiverem manipuladas e corretas, abre a página de pagamento
+    if (
+      !form.errors.receiver &&
+      form.touched.receiver &&
+      !form.errors.description &&
+      form.touched.description &&
+      !form.errors.city &&
+      form.touched.city &&
+      !form.errors.zipCode &&
+      form.touched.zipCode &&
+      !form.errors.number &&
+      form.touched.number
+    ) {
+      setPayment(true);
+    }
   };
 
   return (
@@ -172,7 +184,7 @@ const CheckoutForm = () => {
       <Overlay onClick={closeCheck} />
       <Sidebar>
         <form onSubmit={form.handleSubmit}>
-          {deliveryInfo && (
+          {!payment && !isSuccess && (
             <section>
               <Title>Entrega</Title>
               <Input>
@@ -183,11 +195,15 @@ const CheckoutForm = () => {
                   type="text"
                   id="receiver"
                   name="receiver"
-                  value={form.values.receiver}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
-                  className={checkInputHasError("receiver") ? "error" : ""}
+                  className={
+                    checkInputHasError("receiver") ? "error-border" : ""
+                  }
                 />
+                <small className="error-message">
+                  {checkInputHasError("receiver", form.errors.receiver)}
+                </small>
               </Input>
               <Input>
                 <label htmlFor="description">Endereço</label>
@@ -195,11 +211,15 @@ const CheckoutForm = () => {
                   type="text"
                   id="description"
                   name="description"
-                  value={form.values.description}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
-                  className={checkInputHasError("description") ? "error" : ""}
+                  className={
+                    checkInputHasError("description") ? "error-border" : ""
+                  }
                 />
+                <small className="error-message">
+                  {checkInputHasError("description", form.errors.description)}
+                </small>
               </Input>
               <Input>
                 <label htmlFor="city">Cidade</label>
@@ -207,36 +227,47 @@ const CheckoutForm = () => {
                   type="text"
                   id="city"
                   name="city"
-                  value={form.values.city}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
-                  className={checkInputHasError("city") ? "error" : ""}
+                  className={checkInputHasError("city") ? "error-border" : ""}
                 />
+                <small className="error-message">
+                  {checkInputHasError("city", form.errors.city)}
+                </small>
               </Input>
               <InputGroup>
                 <Input>
                   <label htmlFor="zipCode">CEP</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="zipCode"
                     name="zipCode"
-                    value={form.values.zipCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("zipCode") ? "error" : ""}
+                    mask="99999-999"
+                    className={
+                      checkInputHasError("zipCode") ? "error-border" : ""
+                    }
                   />
+                  <small className="error-message">
+                    {checkInputHasError("zipCode", form.errors.zipCode)}
+                  </small>
                 </Input>
                 <Input>
                   <label htmlFor="number">Número</label>
                   <input
-                    type="number"
+                    type="string"
                     id="number"
                     name="number"
-                    value={form.values.number}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("number") ? "error" : ""}
+                    className={
+                      checkInputHasError("number") ? "error-border" : ""
+                    }
                   />
+                  <small className="error-message">
+                    {checkInputHasError("number", form.errors.number)}
+                  </small>
                 </Input>
               </InputGroup>
               <Input>
@@ -245,21 +276,22 @@ const CheckoutForm = () => {
                   type="text"
                   id="complement"
                   name="complement"
-                  value={form.values.complement}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
               </Input>
               <ButtonGroup>
-                <Button disabled={!form.isValid} onClick={goToPayment}>
+                <Button type="submit" onClick={goToPayment}>
                   Continuar com o pagamento
                 </Button>
-                <Button onClick={goBackToCart}>Voltar para o carrinho</Button>
+                <Button type="button" onClick={goBackToCart}>
+                  Voltar para o carrinho
+                </Button>
               </ButtonGroup>
             </section>
           )}
 
-          {payment && (
+          {payment && !isSuccess && (
             <section>
               <Title>
                 Pagamento - Valor a pagar {formatPrice(getTotalPrice(items))}
@@ -271,75 +303,92 @@ const CheckoutForm = () => {
                     type="text"
                     id="name"
                     name="name"
-                    value={form.values.name}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("name") ? "error" : ""}
+                    className={checkInputHasError("name") ? "error-border" : ""}
                   />
+                  <small className="error-message">
+                    {checkInputHasError("name", form.errors.name)}
+                  </small>
                 </Input>
                 <InputGroup>
                   <Input>
                     <label htmlFor="cardNumber">Número</label>
-                    <input
+                    <InputMask
                       type="text"
                       id="cardNumber"
                       name="cardNumber"
-                      value={form.values.cardNumber}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="9999 9999 9999 9999"
                       className={
-                        checkInputHasError("cardNumber") ? "error" : ""
+                        checkInputHasError("cardNumber") ? "error-border" : ""
                       }
                     />
+                    <small className="error-message">
+                      {checkInputHasError("cardNumber", form.errors.cardNumber)}
+                    </small>
                   </Input>
                   <Input>
                     <label htmlFor="code">CVV</label>
-                    <input
+                    <InputMask
                       type="text"
                       id="code"
                       name="code"
-                      value={form.values.code}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
-                      className={checkInputHasError("code") ? "error" : ""}
+                      mask="999"
+                      className={
+                        checkInputHasError("code") ? "error-border" : ""
+                      }
                     />
+                    <small className="error-message">
+                      {checkInputHasError("code", form.errors.code)}
+                    </small>
                   </Input>
                 </InputGroup>
                 <InputGroup>
                   <Input>
                     <label htmlFor="month">Mês de vencimento</label>
-                    <input
-                      type="number"
+                    <InputMask
+                      type="text"
                       id="month"
                       name="month"
-                      value={form.values.month}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
-                      className={checkInputHasError("month") ? "error" : ""}
+                      mask="99"
+                      className={
+                        checkInputHasError("month") ? "error-border" : ""
+                      }
                     />
+                    <small className="error-message">
+                      {checkInputHasError("month", form.errors.month)}
+                    </small>
                   </Input>
                   <Input>
                     <label htmlFor="year">Ano de vencimento</label>
-                    <input
-                      type="number"
+                    <InputMask
+                      type="text"
                       id="year"
                       name="year"
-                      value={form.values.year}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
-                      className={checkInputHasError("year") ? "error" : ""}
+                      mask="9999"
+                      className={
+                        checkInputHasError("year") ? "error-border" : ""
+                      }
                     />
+                    <small className="error-message">
+                      {checkInputHasError(
+                        "year",
+                        `Precisa ter 4 caracteres e ser maior ou igual à ${new Date().getFullYear()}`
+                      )}
+                    </small>
                   </Input>
                 </InputGroup>
                 <ButtonGroup>
-                  <Button
-                    type="submit"
-                    disabled={!form.isValid}
-                    onClick={showSuccessMessage}
-                  >
-                    Finalizar pagamento
-                  </Button>
-                  <Button onClick={goBackToDeliveryInfo}>
+                  <Button type="submit">Finalizar pagamento</Button>
+                  <Button onClick={() => setPayment(false)}>
                     Voltar para a edição de endereço
                   </Button>
                 </ButtonGroup>
@@ -348,9 +397,9 @@ const CheckoutForm = () => {
           )}
         </form>
 
-        {successMessage && (
-          <div>
-            <Title>Pedido realizado - {data!.orderId}</Title>
+        {isSuccess && payment && data && (
+          <>
+            <Title>Pedido realizado - {data?.orderId}</Title>
             <div>
               <p>
                 Estamos felizes em informar que seu pedido já está em processo
@@ -370,8 +419,8 @@ const CheckoutForm = () => {
                 gastronômica. Bom apetite!
               </p>
             </div>
-            <Button onClick={closeSuccessMessage}>Concluir</Button>
-          </div>
+            <Button onClick={() => location.reload()}>Concluir</Button>
+          </>
         )}
       </Sidebar>
     </CheckoutContainer>

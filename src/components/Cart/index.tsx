@@ -18,7 +18,6 @@ import {
 import { Button } from "../Dish/styles";
 
 import removeIcon from "../../assets/remove.png";
-
 import CheckoutForm from "../Checkout";
 
 export const Cart = () => {
@@ -26,7 +25,7 @@ export const Cart = () => {
   const { isCartOpen, items } = useSelector((state: RootReducer) => state.cart);
   const { isCheckoutOpen } = useSelector(
     (state: RootReducer) => state.checkout
-  );
+  ); 
 
   const dispatch = useDispatch();
 
@@ -50,8 +49,8 @@ export const Cart = () => {
         {items.length >= 1 ? (
           <>
             <ul>
-              {items.map((item, index) => (
-                <Product key={index}>
+              {items.map((item) => (
+                <Product key={Math.random() * 101}>
                   <ProductImage src={item.foto} />
                   <div>
                     <h3>{item.nome}</h3>
@@ -80,8 +79,8 @@ export const Cart = () => {
         ) : (
           <p className="empty-cart-warning">Seu carrinho está vazio</p>
         )}
-        {isCheckoutOpen && <CheckoutForm />}
       </Sidebar>
+      {isCheckoutOpen && <CheckoutForm />}
     </CartContainer>
   );
 };

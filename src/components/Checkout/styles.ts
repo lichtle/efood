@@ -64,9 +64,14 @@ export const Input = styled.div`
     margin-bottom: 8px;
     border: none;
 
-    &.error {
+    &.error-border {
       border: 3px solid red;
     }
+  }
+
+  .error-message {
+    margin-bottom: 16px;
+    color: yellow;
   }
 `;
 
