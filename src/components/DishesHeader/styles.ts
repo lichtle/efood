@@ -27,6 +27,7 @@ export const BackgroundContainer = styled.div`
 
     span {
       margin-left: 193px;
+      user-select: none;
     }
   }
 `;
