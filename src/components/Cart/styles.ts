@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -45,12 +45,22 @@ export const Sidebar = styled.aside`
   .empty-cart-warning {
     text-align: center;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 75%;
+    padding: 8px;
+
+    .empty-cart-warning {
+      padding-top: 16px;
+    }
+  }
 `;
 
 export const Product = styled.li`
   background-color: ${colors.buttonAddBuy};
   color: ${colors.buttonKnowMore};
   display: flex;
+
   margin-bottom: 16px;
   padding: 8px;
   position: relative;
@@ -68,6 +78,12 @@ export const Product = styled.li`
       display: block;
       font-size: 14px;
       font-weight: 400;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    div {
+      margin: 0 0 0 8px;
     }
   }
 `;

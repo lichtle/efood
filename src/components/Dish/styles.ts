@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { About } from "../Restaurant/styles";
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 type Props = {
   width?: string;
@@ -64,6 +64,10 @@ export const Modal = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.73);
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 0 16px;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -105,6 +109,22 @@ export const ModalContent = styled.div`
     display: block;
     max-width: 100%;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 16px;
+
+    .close-button {
+      top: 11px;
+      right: 11px;
+    }
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    .close-button {
+      top: 11px;
+      right: 16px;
+    }
+  }
 `;
 
 export const InfosContainer = styled.div`
@@ -121,5 +141,21 @@ export const InfosContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+    padding: 24px 0 0 0;
+
+    img {
+      height: 150px;
+    }
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    img {
+      height: 200px;
+      width: 100%;
+    }
   }
 `;

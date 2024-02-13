@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 import fundo from "../../assets/header.png";
 
@@ -28,6 +28,28 @@ export const BackgroundContainer = styled.div`
     span {
       margin-left: 193px;
       user-select: none;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: 200px;
+    padding: 32px;
+
+    .container {
+      flex-direction: column;
+      gap: 16px;
+
+      img {
+        max-width: 100px;
+      }
+
+      h1 {
+        margin-right: 0;
+      }
+
+      span {
+        margin-left: 0;
+      }
     }
   }
 `;

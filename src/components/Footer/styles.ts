@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+
+import { breakpoints, colors } from "../../styles";
 
 export const FooterContainer = styled.div`
   background-color: ${colors.buttonAddBuy};
@@ -18,6 +19,10 @@ export const FooterContainer = styled.div`
       text-align: center;
       color: ${colors.buttonKnowMore};
       padding: 80px 0 40px;
+
+      @media (max-width: ${breakpoints.tablet}) {
+        padding: 40px;
+      }
     }
   }
 `;

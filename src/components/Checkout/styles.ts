@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const CheckoutContainer = styled.div`
   position: fixed;
@@ -39,6 +39,11 @@ export const Sidebar = styled.aside`
     color: ${colors.buttonAddBuy};
     margin-bottom: 24px;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 75%;
+    padding: 16px 8px;
+  }
 `;
 
 export const Title = styled.h2`
@@ -46,6 +51,10 @@ export const Title = styled.h2`
   font-weight: 700;
   margin-bottom: 16px;
   color: ${colors.background};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    line-height: 22px;
+  }
 `;
 
 export const Input = styled.div`
@@ -81,6 +90,18 @@ export const InputGroup = styled.div`
 
   #code {
     width: 87px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+  }
+
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    flex-direction: row;
+
+    #code {
+      width: 100%;
+    }
   }
 `;
 

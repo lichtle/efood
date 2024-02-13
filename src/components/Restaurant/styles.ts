@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const Card = styled.div`
   border: 1px solid ${colors.buttonKnowMore};
   position: relative;
   max-width: 472px;
-  max-height: 398px;
+  height: 100%;
 
   button {
     font-size: 14px;
@@ -16,8 +16,15 @@ export const Card = styled.div`
 
   img {
     max-height: 217px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    img {
+      max-height: 223px;
+    }
   }
 `;
 
@@ -46,6 +53,10 @@ export const NameRate = styled.div`
   h2,
   span {
     font-size: 18px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 16px;
+    }
   }
 `;
 

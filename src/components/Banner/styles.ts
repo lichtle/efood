@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { breakpoints } from "../../styles";
+
 type Props = {
   image: string;
 };
@@ -28,6 +30,19 @@ export const Container = styled.div<Props>`
     span {
       font-weight: 100;
       top: 25px;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    .container {
+      h3,
+      span {
+        left: 16px;
+      }
+
+      h3 {
+        font-size: 32px;
+      }
     }
   }
 `;

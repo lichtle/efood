@@ -1,5 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
+export const breakpoints = {
+  desktop: "1024px",
+  tablet: "768px",
+};
+
 export const colors = {
   background: "#FFF8F2",
   buttonKnowMore: "#E66767",

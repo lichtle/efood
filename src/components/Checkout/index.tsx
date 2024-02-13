@@ -106,8 +106,8 @@ const CheckoutForm = () => {
         .required("Este campo é obrigatório"),
 
       month: Yup.number()
-        .min(1, "Apenas números de 1 à 12")
-        .max(12, "O mês precisa estar entre 1 e 12")
+        .min(1, "Insira um número de 01 à 12")
+        .max(12, "O mês precisa estar entre 01 e 12")
         .required("Este campo é obrigatório"),
 
       year: Yup.number()
@@ -294,7 +294,7 @@ const CheckoutForm = () => {
           {payment && !isSuccess && (
             <section>
               <Title>
-                Pagamento - Valor a pagar {formatPrice(getTotalPrice(items))}
+                Pagamento - Valor a pagar: {formatPrice(getTotalPrice(items))}
               </Title>
               <div>
                 <Input>
@@ -362,7 +362,10 @@ const CheckoutForm = () => {
                       }
                     />
                     <small className="error-message">
-                      {checkInputHasError("month", form.errors.month)}
+                      {checkInputHasError(
+                        "month",
+                        "O mês precisa estar entre 01 e 12"
+                      )}
                     </small>
                   </Input>
                   <Input>
