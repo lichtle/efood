@@ -87,7 +87,6 @@ export const Product = styled.li`
 
       h3 {
         font-size: 16px;
-        margin-bottom: 20px;
       }
     }
   }
