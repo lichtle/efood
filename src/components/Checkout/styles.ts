@@ -41,7 +41,7 @@ export const Sidebar = styled.aside`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    width: 75%;
+    width: 80%;
     padding: 16px 8px;
   }
 `;
