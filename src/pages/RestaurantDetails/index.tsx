@@ -42,11 +42,11 @@ const RestaurantDetails = () => {
       )}
       <div className="container">
         <ListOfDishes>
-          {menu.map((item) => (
+          {menu.map((item) => {return (
             <li key={item.id}>
               <Dish dish={item} />
             </li>
-          ))}
+          )})}
         </ListOfDishes>
       </div>
     </>

@@ -82,6 +82,13 @@ export const Input = styled.div`
     margin-bottom: 16px;
     color: yellow;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    input {
+      height: 22px;
+      margin-bottom: 4px;
+    }
+  }
 `;
 
 export const InputGroup = styled.div`

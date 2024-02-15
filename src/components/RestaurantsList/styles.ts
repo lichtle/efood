@@ -14,7 +14,7 @@ export const List = styled.ul`
     padding: 20px;
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
     grid-template-columns: 1fr 1fr;
     column-gap: 32px;
     padding: 32px;

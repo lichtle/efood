@@ -41,7 +41,7 @@ export const BackgroundContainer = styled.div`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    height: 170px;
+    height: 100%;
 
     .container {
       h1 {

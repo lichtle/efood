@@ -47,7 +47,7 @@ export const Sidebar = styled.aside`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    width: 75%;
+    width: 80%;
     padding: 8px;
 
     .empty-cart-warning {
@@ -60,7 +60,7 @@ export const Product = styled.li`
   background-color: ${colors.buttonAddBuy};
   color: ${colors.buttonKnowMore};
   display: flex;
-
+  justify-content: space-between;
   margin-bottom: 16px;
   padding: 8px;
   position: relative;
@@ -84,6 +84,11 @@ export const Product = styled.li`
   @media (max-width: ${breakpoints.tablet}) {
     div {
       margin: 0 0 0 8px;
+
+      h3 {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
     }
   }
 `;
@@ -92,6 +97,11 @@ export const ProductImage = styled.img`
   width: 80px;
   height: 80px;
   object-fit: cover;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: 100px;
+    width: 100px;
+  }
 `;
 
 export const RemoveButton = styled.img`

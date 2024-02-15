@@ -8,7 +8,6 @@ export const Card = styled.div`
   border: 1px solid ${colors.buttonKnowMore};
   position: relative;
   max-width: 472px;
-  height: 100%;
 
   button {
     font-size: 14px;
@@ -22,6 +21,8 @@ export const Card = styled.div`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
+    max-width: 100%;
+
     img {
       max-height: 223px;
     }
